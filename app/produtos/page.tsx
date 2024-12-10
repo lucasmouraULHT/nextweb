@@ -12,6 +12,7 @@ export default function ProductsPage() {
         '/api/products', 
         fetcher
     );
+    
 
     if (error) return <div>Failed to load</div>;
     if (isLoading) return <div>Loading...</div>;
