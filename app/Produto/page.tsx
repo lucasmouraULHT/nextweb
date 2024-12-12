@@ -3,6 +3,6 @@
 import React from 'react';
 import { Product } from '@/app/models/interfaces';
 
-function Produto({ id, title, price, description }: Product) {
+export function Produto({ id, title, price, description }: Product) {
     return <div>{id} {title},{price},{description} </div>;
 }
