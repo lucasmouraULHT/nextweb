@@ -2,10 +2,12 @@
 
 import useSWR from 'swr';
 import Card from '@/components/Card/Card';
+import { Product } from '../models/interfaces';
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+
 
 export default function ProductsPage() {
+    const fetcher = (url: string) => fetch(url).then((res) => res.json());
     const { data, error, isLoading } = useSWR<Product[]>(
         '/api/products', 
         fetcher
