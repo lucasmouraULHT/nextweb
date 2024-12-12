@@ -16,10 +16,9 @@ export default function TecnologiasPage() {
                 <CardT
                     key={index}
                     title={tecnologia.title}
-                    image={tecnologia.image}
+                    // image={tecnologia.image}
                     description={tecnologia.description}
-                    rating={tecnologia.rating}
-                />
+                    rating={tecnologia.rating}                />
             ))}
         </div>
     );

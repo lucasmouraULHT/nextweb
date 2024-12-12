@@ -3,10 +3,10 @@
 import React from 'react';
 import { TecnologiaC } from '@/app/models/interfacesT';
 
-export default function Tecnologia({ title, image, description, rating }: TecnologiaC) {
+export default function Tecnologia({ title, description, rating }: TecnologiaC) {
     return (
         <div>
-            {title},{image},{description} ,{rating} 
+            {title},{description} ,{rating} 
         </div>
     );
 }

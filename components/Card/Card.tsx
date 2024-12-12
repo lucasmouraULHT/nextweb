@@ -7,7 +7,7 @@ import { Product } from '@/app/models/interfaces';
 
 interface CardProps extends Product {}
 
-export default function Card({ id, title, price, description, image }: CardProps) {
+export default function Card({ title, price, description, image }: CardProps) {
     return (
         <div className="border border-gray-300 rounded-lg p-4 shadow-md max-w-sm">
             {/* Imagem do Produto */}
