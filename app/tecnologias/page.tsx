@@ -1,39 +1,26 @@
 'use client';
-import React from 'react'
 
-// import tecnologias from '@/app/data/tecnologias.json';
+import CardT from '@/components/CardT/CardT';
+import tecnologias from '@/app/data/tecnologias.json'; // Importa o JSON diretamente
+import { TecnologiaC } from '@/app/models/interfacesT';
 
+export default function TecnologiasPage() {
+    // Usa diretamente o JSON para simular o comportamento do fetcher
+    const data: TecnologiaC[] = tecnologias;
 
-import Image from 'next/image';
-// import { Product } from '@/app/models/interfaces';
-// import { title } from 'process';
-import { TecnologiaC } from '../models/interfacesT';
+    if (!data || data.length === 0) return <div>No data available</div>;
 
-
-interface Tecnologia extends TecnologiaC {}//Tecnologia
-
-export default function CardT({ title, image, description, rating }: TecnologiaC) {
     return (
-        <div className="border border-gray-300 rounded-lg p-4 shadow-md max-w-sm">
-            {/* Imagem do Produto */}
-            <div className="relative w-full h-40 mb-4">
-                <Image
-                    src={image}
-                    alt={title}
-                    fill
-                    className="object-cover rounded-md"
+        <div className="grid grid-cols-1">
+            {data.map((tecnologia, index) => (
+                <CardT
+                    key={index}
+                    title={tecnologia.title}
+                    image={tecnologia.image}
+                    description={tecnologia.description}
+                    rating={tecnologia.rating}
                 />
-            </div>
-            
-            {/* Nome do Produto */}
-            <h2 className="text-lg font-bold mb-2">{title}</h2>
-
-            {/* rating */}
-            
-            {/* Descrição */}
-            <p className="text-gray-600 text-sm mb-4">{description}</p>
-            <p className="text-blue-500 font-bold text-lg">${rating}</p>
-            
+            ))}
         </div>
     );
 }
