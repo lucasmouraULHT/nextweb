@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Product } from '@/app/models/interfaces';
-import { title } from 'process';
+// import { title } from 'process';
 
 interface CardProps extends Product {}
 

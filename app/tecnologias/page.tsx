@@ -1,12 +1,12 @@
 'use client';
 import React from 'react'
 
-import tecnologias from '@/app/data/tecnologias.json';
+// import tecnologias from '@/app/data/tecnologias.json';
 
 
 import Image from 'next/image';
 // import { Product } from '@/app/models/interfaces';
-import { title } from 'process';
+// import { title } from 'process';
 import { TecnologiaC } from '../models/interfacesT';
 
 
