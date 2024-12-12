@@ -1,7 +1,6 @@
 'use client';
   
   import React from 'react';
-  import Image from 'next/image';
 //   import { title } from 'process';
 import { TecnologiaC } from '@/app/models/interfacesT';
   
@@ -10,8 +9,7 @@ import { TecnologiaC } from '@/app/models/interfacesT';
   export default function CardT({ title, rating, description}: TecnologiaC) {
       return (
           <div className="border border-gray-300 rounded-lg p-4 shadow-md max-w-sm">
-              
-              
+ 
               {/* Nome do Produto */}
               <h2 className="text-lg font-bold mb-2">{title}</h2>
   
