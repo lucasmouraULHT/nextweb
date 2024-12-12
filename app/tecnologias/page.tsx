@@ -11,7 +11,7 @@ export default function TecnologiasPage() {
     if (!data || data.length === 0) return <div>No data available</div>;
 
     return (
-        <div className="grid grid-cols-1">
+        <>
             {data.map((tecnologia, index) => (
                 <CardT
                     key={index}
@@ -20,6 +20,6 @@ export default function TecnologiasPage() {
                     description={tecnologia.description}
                     rating={tecnologia.rating}                />
             ))}
-        </div>
+        </>
     );
 }

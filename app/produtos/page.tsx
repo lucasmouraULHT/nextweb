@@ -17,11 +17,11 @@ export default function ProductsPage() {
     if (!data) return <div>No data available</div>;
 
     return (
-        <div  className="grid grid-cols-1">
+        <>
             {data.map((product) => (
                 <Card key={product.id} id={product.id} title={product.title} price={product.price} description={product.description} image={product.image} />
             ))}
             
-        </div>
+        </>
     );
 }
