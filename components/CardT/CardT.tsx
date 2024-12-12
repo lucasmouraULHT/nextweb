@@ -4,7 +4,7 @@
 //   import { title } from 'process';
 import { TecnologiaC } from '@/app/models/interfacesT';
   
-  interface CardT extends TecnologiaC {}
+  // interface CardT extends TecnologiaC {}
   
   export default function CardT({ title, rating, description}: TecnologiaC) {
       return (

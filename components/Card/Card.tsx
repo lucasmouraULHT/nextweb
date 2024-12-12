@@ -5,9 +5,7 @@ import Image from 'next/image';
 import { Product } from '@/app/models/interfaces';
 // import { title } from 'process';
 
-interface CardProps extends Product {}
-
-export default function Card({ title, price, description, image }: CardProps) {
+export default function Card({ title, price, description, image }: Product) {
     return (
         <div className="border border-gray-300 rounded-lg p-4 shadow-md max-w-sm">
             {/* Imagem do Produto */}
@@ -19,8 +17,6 @@ export default function Card({ title, price, description, image }: CardProps) {
                     className="object-cover rounded-md"
                 />
             </div>
-            
-            {/* Nome do Produto */}
             <h2 className="text-lg font-bold mb-2">{title}</h2>
 
             {/* Preço */}
