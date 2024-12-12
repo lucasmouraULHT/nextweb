@@ -1,0 +1,26 @@
+[
+    {
+      "title": "React",
+      "image": "/images/react-logo.png",
+      "description": "Uma biblioteca JavaScript para construir interfaces de usuário.",
+      "rating": 5
+    },
+    {
+      "title": "Next.js",
+      "image": "/images/nextjs-logo.png",
+      "description": "Um framework React para renderização do lado do servidor e geração de sites estáticos.",
+      "rating": 5
+    },
+    {
+      "title": "Node.js",
+      "image": "/images/nodejs-logo.png",
+      "description": "Um runtime JavaScript para execução no lado do servidor.",
+      "rating": 4
+    },
+    {
+      "title": "Tailwind CSS",
+      "image": "/images/tailwind-logo.png",
+      "description": "Uma framework CSS para criação de designs modernos e responsivos.",
+      "rating": 4
+    }
+]
