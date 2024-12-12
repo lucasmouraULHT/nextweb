@@ -1,9 +1,7 @@
 'use client';
 
 import useSWR from 'swr';
-// import Produto from '@/app/Produto/page';
 import Card from '@/components/Card/Card';
-import { Product } from '@/app/models/interfaces';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 

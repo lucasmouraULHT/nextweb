@@ -2,7 +2,6 @@
 
 import CardT from '@/components/CardT/CardT';
 import tecnologias from '@/app/data/tecnologias.json'; // Importa o JSON diretamente
-import { TecnologiaC } from '@/app/models/interfacesT';
 
 export default function TecnologiasPage() {
     // Usa diretamente o JSON para simular o comportamento do fetcher

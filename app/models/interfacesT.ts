@@ -1,4 +1,4 @@
-export interface TecnologiaC {
+interface TecnologiaC {
     title: string;
     description: string;
     rating: number;
