@@ -3,10 +3,20 @@
 import React from 'react';
 import { TecnologiaC } from '@/app/models/interfacesT';
 
-export default function Tecnologia({ title, description, rating }: TecnologiaC) {
-    return (
-        <div>
-            {title} {description} {rating} 
-        </div>
-    );
+const exampleTecnologia: TecnologiaC = {
+  title: 'Exemplo de Tecnologia',
+  description: 'Esta é uma descrição de tecnologia.',
+  rating: 5,
+};
+
+export default function Tecnologia() {
+  const { title, description, rating } = exampleTecnologia;
+
+  return (
+    <div>
+      <h2>{title}</h2>
+      <p>{description}</p>
+      <p>Rating: {rating}</p>
+    </div>
+  );
 }
