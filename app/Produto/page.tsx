@@ -3,12 +3,17 @@
 import React from 'react';
 import { Product } from '@/app/models/interfaces';
 
-interface ProdutoProps {
-  product: Product;
-}
+const exampleProduct: Product = {
+  id: 1,
+  title: 'Produto Exemplo',
+  price: 100,
+  description: 'Este é um produto de exemplo.',
+  image: '/path/to/image.jpg',
+};
 
-export default function Produto({ product }: ProdutoProps) {
-  const { id, title, price, description, image } = product;
+export default function Produto() {
+  const { id, title, price, description, image } = exampleProduct;
+
   return (
     <div>
       <h2>{title}</h2>
