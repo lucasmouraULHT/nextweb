@@ -10,6 +10,8 @@ export default function ProductsPage() {
     const fetcher = (url: string) => fetch(url).then((res) => res.json());
     const { data, error, isLoading } = useSWR<Product[], Error>('https://deisishop.pythonanywhere.com/products', fetcher);
     const [filteredData, setFilteredData] = useState<Product[]>([]);
+    const [cart, setCart] = useState<Product[]>([]);
+
 
     // Atualize filteredData apenas quando search ou data mudarem
     useEffect(() => {
@@ -38,15 +40,22 @@ export default function ProductsPage() {
 
             {/* Use filteredData para renderizar os cards */}
             {filteredData.map((product) => (
-                <Card
-                    key={product.id}
-                    id={product.id}
-                    title={product.title}
-                    price={product.price}
-                    description={product.description}
-                    image={product.image}
-                />
+                <div key={product.id} className="mb-4">
+                    <Card
+                        id={product.id}
+                        title={product.title}
+                        price={product.price}
+                        description={product.description}
+                        image={product.image}
+                    />
+                    <button
+                        className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                    >
+                        Adicionar ao Carrinho
+                    </button>
+                </div>
             ))}
+
 
             <br /><br />
             Carrinho:
