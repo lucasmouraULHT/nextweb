@@ -10,6 +10,7 @@ export default function Header() {
         <Link href="/">Home →</Link>
         <Link href="/produtos">Produtos</Link>
         <Link href="/tecnologias">Tecnologias</Link>
+        <Link href="/lab">Lab12</Link>
       </nav>
     </header>
   );
