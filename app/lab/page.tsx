@@ -8,20 +8,41 @@ import { useEffect, useState } from 'react';
 export default function ProductsPage() {
     const [search, setSearch] = useState("");
     const fetcher = (url: string) => fetch(url).then((res) => res.json());
-    const { data, error, isLoading } = useSWR<Product[], Error>('https://deisishop.pythonanywhere.com/products', fetcher);
+    const { data, error, isLoading } = useSWR<Product[], Error>(
+        'https://deisishop.pythonanywhere.com/products',
+        fetcher
+    );
     const [filteredData, setFilteredData] = useState<Product[]>([]);
-    const [cart, setCart] = useState<Product[]>([]);
+    const [cart, setCart] = useState<Product[]>(() => {
+        // Inicialize o carrinho com os dados do localStorage
+        if (typeof window !== "undefined") {
+            const storedCart = localStorage.getItem('cart');
+            return storedCart ? JSON.parse(storedCart) : [];
+        }
+        return [];
+    });
 
+    // Função para adicionar um produto ao carrinho
+    const addItemToCart = (product: Product) => {
+        setCart((prevCart) => [...prevCart, product]);
+    };
 
-    // Atualize filteredData apenas quando search ou data mudarem
+    // Atualizar os produtos filtrados quando a busca ou os dados mudarem
     useEffect(() => {
-        if (data) { // Certifique-se de que `data` está carregado antes de usar
-            const newFilteredData = data.filter((product) => {
-                return product.title.toLowerCase().includes(search.toLowerCase());
-            });
+        if (data) {
+            const newFilteredData = data.filter((product) =>
+                product.title.toLowerCase().includes(search.toLowerCase())
+            );
             setFilteredData(newFilteredData);
         }
     }, [search, data]);
+
+    // Salvar o carrinho no localStorage sempre que ele for atualizado
+    useEffect(() => {
+        if (cart.length > 0) {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+    }, [cart]);
 
     if (error) return <div>Failed to load</div>;
     if (isLoading) return <div>Loading...</div>;
@@ -29,6 +50,7 @@ export default function ProductsPage() {
 
     return (
         <>
+            {/* Campo de busca */}
             <input
                 type="text"
                 value={search}
@@ -38,27 +60,28 @@ export default function ProductsPage() {
             />
             <br />
 
-            {/* Use filteredData para renderizar os cards */}
+            {/* Lista de produtos */}
             {filteredData.map((product) => (
                 <div key={product.id} className="mb-4">
                     <Card
-                        id={product.id}
-                        title={product.title}
-                        price={product.price}
-                        description={product.description}
-                        image={product.image}
+                        product={product}
+                        addItemToCart={addItemToCart}
                     />
-                    <button
-                        className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                    >
-                        Adicionar ao Carrinho
-                    </button>
                 </div>
             ))}
 
+            <br />
+            <br />
 
-            <br /><br />
-            Carrinho:
+            {/* Carrinho */}
+            <h2 className="text-xl font-bold mb-2">Carrinho:</h2>
+            <ul>
+                {cart.map((item, index) => (
+                    <li key={index}>
+                        {item.title} - ${item.price.toFixed(2)}
+                    </li>
+                ))}
+            </ul>
         </>
     );
 }
