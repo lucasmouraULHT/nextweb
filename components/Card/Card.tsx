@@ -10,7 +10,7 @@ interface CardProps {
 }
 
 export default function Card({ product, addItemToCart }: CardProps) {
-    const { title, price, description, image } = product;
+    const { id, title, price, description, image } = product;
 
     return (
         <div className="border border-gray-300 rounded-lg p-4 shadow-md max-w-sm">
