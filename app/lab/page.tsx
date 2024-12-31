@@ -6,7 +6,7 @@ import { Product } from '@/app/models/interfaces';
 import { useEffect, useState } from 'react';
 
 export default function ProductsPage() {
-    const [search, setSearch] = useState("");
+    const [search, setSearch] = useState('');
     const fetcher = (url: string) => fetch(url).then((res) => res.json());
     const { data, error, isLoading } = useSWR<Product[], Error>(
         'https://deisishop.pythonanywhere.com/products',
@@ -14,20 +14,17 @@ export default function ProductsPage() {
     );
     const [filteredData, setFilteredData] = useState<Product[]>([]);
     const [cart, setCart] = useState<Product[]>(() => {
-        // Inicialize o carrinho com os dados do localStorage
-        if (typeof window !== "undefined") {
+        if (typeof window !== 'undefined') {
             const storedCart = localStorage.getItem('cart');
             return storedCart ? JSON.parse(storedCart) : [];
         }
         return [];
     });
 
-    // Função para adicionar um produto ao carrinho
     const addItemToCart = (product: Product) => {
         setCart((prevCart) => [...prevCart, product]);
     };
 
-    // Atualizar os produtos filtrados quando a busca ou os dados mudarem
     useEffect(() => {
         if (data) {
             const newFilteredData = data.filter((product) =>
@@ -37,12 +34,39 @@ export default function ProductsPage() {
         }
     }, [search, data]);
 
-    // Salvar o carrinho no localStorage sempre que ele for atualizado
     useEffect(() => {
         if (cart.length > 0) {
             localStorage.setItem('cart', JSON.stringify(cart));
         }
     }, [cart]);
+
+    const buy = async () => {
+        try {
+            const response = await fetch('/api/deisishop/buy', {
+                method: 'POST',
+                body: JSON.stringify({
+                    products: cart.map((product) => product.id),
+                    name: '',
+                    student: false,
+                    coupon: '',
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error('Erro ao realizar a compra');
+            }
+
+            const data = await response.json();
+            console.log('Compra realizada com sucesso:', data);
+            setCart([]); // Limpar o carrinho após a compra
+            localStorage.removeItem('cart');
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     if (error) return <div>Failed to load</div>;
     if (isLoading) return <div>Loading...</div>;
@@ -50,7 +74,6 @@ export default function ProductsPage() {
 
     return (
         <>
-            {/* Campo de busca */}
             <input
                 type="text"
                 value={search}
@@ -60,20 +83,15 @@ export default function ProductsPage() {
             />
             <br />
 
-            {/* Lista de produtos */}
             {filteredData.map((product) => (
                 <div key={product.id} className="mb-4">
-                    <Card
-                        product={product}
-                        addItemToCart={addItemToCart}
-                    />
+                    <Card product={product} addItemToCart={addItemToCart} />
                 </div>
             ))}
 
             <br />
             <br />
 
-            {/* Carrinho */}
             <h2 className="text-xl font-bold mb-2">Carrinho:</h2>
             <ul>
                 {cart.map((item, index) => (
@@ -82,6 +100,12 @@ export default function ProductsPage() {
                     </li>
                 ))}
             </ul>
+            <button
+                className="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                onClick={buy}
+            >
+                Comprar
+            </button>
         </>
     );
 }
